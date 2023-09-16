@@ -1,0 +1,35 @@
+<!-- Weather city dropdown goes here. -->
+<select class="form-select form-select-lg" (change)="selectCity($event)">
+    <option *ngFor="let city of cities;" value="{{city.cityName}}">{{city.cityName}}</option>
+</select>
+<!-- <button type="button" class="btn btn-primary mybtn">Get Weather</button> -->
+<!-- Weather main container goes here. -->
+
+<div *ngIf="getData" class="card" id="content" style="width: 18rem;">
+    <div class="card-body">
+        <h2 class="card-title">{{getData.name}}, {{getData.sys.country}}</h2>
+        <h4><svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-fill" viewBox="0 0 16 16">
+            <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+        </svg> {{getData.main.temp-273 | number : '1.0-0'}}°C</h4>
+        <p class="card-text">Feels like {{getData.main.feels_like-273 | number : '1.0-0'}}°C. {{getData.weather[0].main}}. {{getData.weather[0].description}}</p>    
+        <div class="d-flex">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"/>
+            </svg> {{getData.wind.speed | number : '1.0-0'}} m/s N</p>
+            <p id="pressure-and-wind-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+            </svg> {{getData.main.pressure}} hPa</p>
+        </div>
+        <div class="d-flex">
+            <p>Humidity: {{getData.main.humidity}}%</p>
+            <p id="humidity-and-uv-text">UV: 4</p>
+        </div>
+        
+        <div class="d-flex">
+            <p>Dew point: 12°C</p> 
+            <p id="visibility-and-dew-text">Visibility: {{getData.visibility / 1000}} km</p>
+        </div>
+        
+    </div>
+</div>
